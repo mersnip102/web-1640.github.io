@@ -1,0 +1,33 @@
+<div *ngFor="let comment of comments" class="media  pt-3 m-auto">
+    <div class="chat-user-online">
+        <img [src]="'http://139.162.47.239/upload/' + comment.user.avatar" width="42" height="42" class="rounded-circle" alt="" />
+    </div>
+    <div class="media-body ml-2">
+        <div class="row">
+            <h5 *ngIf="comment.anonymous == false" class="mb-0 chat-title col-8">{{comment.user.fullName}}</h5>
+            <h5 *ngIf="comment.anonymous == true" class="mb-0 chat-title col-8">Unknow</h5>
+            <p class=" col-4 text-right">{{comment.timeAgo}}</p>
+        </div>
+        <div class="row">
+            <p *ngIf="!isEditing" (dblclick)="enableEditing()" class=" mb-0 pt-0 form-label col-8">{{comment.content}}</p>
+            <input *ngIf="isEditing" [(ngModel)]="commentText" (blur)="disableEditing(comment.id)" (keydown.enter)="disableEditing(comment.id)" />
+            <div *ngIf="checkUpdateDeleteOptions(comment.user.userId)" class="dropdown  col-4 text-right">
+                <div class="cursor-pointer font-24 dropdown-toggle dropdown-toggle-nocaret " data-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded'></i>
+                </div>
+                <div class="dropdown-menu dropdown-menu-right bg-body"> <a class="dropdown-item" type="button">Edit Comment</a>
+                    <a type="button" (click)="deleteComment(comment.id)" class="dropdown-item" type="button">Delete Comment</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div (click)="likeComment(comment.id)" class="col-1">
+                <p type="button" class=" btn btn-sm text-info font-13"><i [ngClass]="{'bxs-like': comment.isLiked == true, 'bx-like': comment.isLiked == false}" class="fadeIn animated bx"></i>{{comment.totalLike}}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,40 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+textarea {
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    resize: none;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="file"]+label {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4267b2;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    height: 10rem;
+    background-color: #eee;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

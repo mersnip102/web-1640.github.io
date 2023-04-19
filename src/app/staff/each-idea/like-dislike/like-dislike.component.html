@@ -1,0 +1,13 @@
+<div class="row align-content-center text-center m-auto">
+
+    <div (click)="like(idea.id)" class="col-1  m-1">
+        <p type="button" class=" btn text-info font-14 "><i [ngClass]="{'bxs-like': idea.isLikes == true, 'bx-like': idea.isLikes == false}" class="fadeIn animated bx"></i> Liked
+        </p>
+    </div>
+
+    <div class="col-1  m-1">
+        <p (click)="dislike(idea.id)" type="button" class=" btn text-info font-14 "><i [ngClass]="{ 'bxs-dislike': idea.isDislikes == true }" class=" fadeIn animated bx "></i> Disliked
+        </p>
+    </div>
+
+</div>

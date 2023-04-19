@@ -1,0 +1,44 @@
+<!-- <div class="col-md-12 card radius-15 align-content-center border mb-0 mt-2"> -->
+<div class="card">
+    <div class="card-body  col-11 m-auto align-content-center  radius-15">
+
+        <form [formGroup]="createIdeaForm" (ngSubmit)="editAnIdea(createIdeaForm.value)" validate>
+
+            <h2 class="text-center ">Edit Idea</h2>
+            <!-- <div class="custom-control custom-switch">
+                        <input formControlName="anonymous" type="checkbox" class="custom-control-input"
+                            id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Hide Identity</label>
+                    </div> -->
+
+            <div class="form-group">
+                <h5 class="text-center">Title</h5>
+                <input type="text" class="form-control" placeholder="Title..." formControlName="title">
+            </div>
+            <div class="form-group">
+                <h5 class="text-center">Category</h5>
+                <select formControlName="categoryId" class="form-select" aria-label="Button group with nested dropdown">
+                            <option *ngFor="let category of categories" [value]="category.id" class="text-center">
+                                {{category.name}}</option>
+
+                        </select>
+            </div>
+
+            <div class="form-group">
+                <h5 class="text-center">Content</h5>
+                <textarea formControlName="content" class="form-control" placeholder="Content..." rows="3" cols="3"></textarea>
+            </div>
+            <div class="form-group">
+
+                <div class="form-check m-3">
+                    <input formControlName="anonymous" type="checkbox" class="form-check-input" required>
+                    <label class="form-check-label" for="customCheck1">Incognito</label>
+                </div>
+                <div class="row col-3 text-center justify-content-center m-auto">
+                    <button type="submit" class="btn btn-primary">Edit Idea</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

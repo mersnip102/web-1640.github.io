@@ -1,0 +1,109 @@
+<!-- wrapper -->
+<div class="wrapper">
+    <!--sidebar-wrapper-->
+    <div class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <div class="">
+                <img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+            </div>
+            <div>
+                <h4 class="logo-text">Greenwich</h4>
+            </div>
+            <a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
+            </a>
+        </div>
+        <!--navigation-->
+        <ul class="metismenu" id="menu">
+            <li>
+                <a [routerLink]="['/admin/homepage']" href="#">
+                    <div class="parent-icon icon-color-2"><i class="bx bx-home-alt"></i>
+                    </div>
+                    <div class="menu-title">Homepage</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon icon-color-2"><i class="bx bx-folder"></i>
+                    </div>
+                    <div class="menu-title">Event</div>
+                </a>
+                <ul>
+                    <li> <a [routerLink]="['/admin/eventlist']"><i class="bx bx-menu"></i>Event List</a>
+                    </li>
+                    <li> <a [routerLink]="['/admin/eventanddeadline']"><i class="bx bx-comment-edit"></i>Event And Deadline</a>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- <li class="menu-label">Web Apps</li> -->
+            <li>
+                <a [routerLink]="['/admin/department']" href="#">
+                    <div class="parent-icon icon-color-2"><i class="bx bx-folder"></i>
+                    </div>
+                    <div class="menu-title">Department</div>
+                </a>
+                
+            </li>
+
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon icon-color-2"><i class="bx bx-group"></i>
+                    </div>
+                    <div class="menu-title">Account Manager</div>
+                </a>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/admin/accountmanager']" href="#"><i class="bx bx-menu"></i>All Account</a>
+
+                    </li>
+                    <li> <a [routerLink]="['/admin/createaccount']"><i class="bx bx-comment-edit"></i>Create New Account</a>
+                    </li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+        <!--end navigation-->
+    </div>
+    <!--end sidebar-wrapper-->
+    <!--header-->
+
+    <app-header></app-header>
+    <!--end header-->
+    <!--page-wrapper-->
+    <lib-ng-toast></lib-ng-toast>
+    <div class="page-wrapper">
+        <!--page-content-wrapper-->
+        <div class="page-content-wrapper">
+
+            <router-outlet></router-outlet>
+        </div>
+        <!--end page-content-wrapper-->
+    </div>
+
+    <!--end page-wrapper-->
+    <!--start overlay-->
+    <div class="overlay toggle-btn-mobile">
+
+    </div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--><a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <!--footer -->
+    <app-footer></app-footer>
+    <!-- end footer -->
+</div>
+<!-- end wrapper -->
+<!--start switcher-->
+<app-switcherWrapper></app-switcherWrapper>
+
+
+
+<script>
+    import PerfectScrollbar from 'perfect-scrollbar';
+    const socialListScrollbar = new PerfectScrollbar('.dashboard-social-list');
+    const topCountriesScrollbar = new PerfectScrollbar('.dashboard-top-countries');
+</script>

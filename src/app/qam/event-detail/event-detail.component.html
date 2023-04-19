@@ -1,0 +1,131 @@
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">
+            <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+            </li>
+        </div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><i class="lni lni-users"></i><a href="javascript:;">QAM </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Document Downloads</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="col-12" style="margin: auto;">
+        <div class="card radius-20">
+            <div class="container">
+                <div class="card-body text-center">
+                    <div class="row me-2">
+                        <div class="flex-grow-1 search-bar col-lg-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend search-arrow-back">
+                                    <button class="btn btn-search-back " type="button"><i class="bx bx-arrow-back"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" placeholder="search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-search" type="button"><i class="lni lni-search-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <br>
+
+
+
+
+                    </div>
+                    <hr>
+
+
+                    <h3 class="mb-0 text-center">Event: {{document.name}}</h3>
+                    <br>
+
+
+
+                    <!--<button type="button" class="btn btn-youtube m-1;" style="float: right;"><i
+                            class="lni lni-zip"></i>Download File Zip</button> -->
+                    <hr>
+
+                </div>
+                <ul>
+                    <div class="table-responsive">
+                        <table class="table mb-0 font-18" style="text-align: center;">
+                            <thead>
+                                <!-- <tr *ngIf="events" ></tr> -->
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name Of Staff</th>
+                                    <th>Idea</th>
+                                    <th>Date</th>
+                                    <th>Total Like</th>
+                                    <th>Total Comments</th>
+                                    <th><span>Download</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor="let event of events">
+                                                        <td>{{events.id}}</td>
+                                                    <td>{{events.nameStaff}}</td>
+                                                    <td>{{events.idea}}</td>
+                                                    <td>{{events.date | date : "medium" }}</td>
+                                                    <td>{{events.totalLike}}</td>
+                                                    <td>{{events.comment}}</td>
+                                                    <td><i class="text-primary" data-feather="download">Documents</i></td>
+
+                                                </tr> -->
+                                <!-- <tr *ngFor="let event of events"> -->
+                                <tr *ngFor="let event of document.idea; let i = index">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{event.user.fullName}}</td>
+                                    <td>{{event.title}}</td>
+                                    <td>{{event.createdAt | date:'dd/MM/yyyy HH:mm'}}</td>
+                                    <td>{{event.totalLike}}</td>
+                                    <td>{{event.totalComment}}</td>
+                                    <td><i class="text-primary" data-feather="download">
+                                        <div *ngFor="let i of event.file.file">
+                                            <a *ngIf="isImage(i); else downloadLink" type="button" (click)="op.toggle($event)">{{i}}</a>
+                                            
+                                                <p-overlayPanel #op>
+                                                    <img style="width: 280px; height: 230px" src="http://139.162.47.239/upload/1680295009008_13.jpg" alt="File" />
+                                                </p-overlayPanel>
+                                            
+                                            
+                                            <ng-template #downloadLink>
+                                                <a [href]="dowload('http://139.162.47.239/download/'+i)" download>{{i}}</a>
+                                              </ng-template>
+                                        </div>
+                                    </i></td>
+
+                                </tr>
+
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </ul>
+                <!-- h6 class="mb-0 text-center text-danger">Total: {{events.length}} </h6>-->
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

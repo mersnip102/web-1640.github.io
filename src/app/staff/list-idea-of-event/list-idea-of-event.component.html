@@ -1,0 +1,153 @@
+<div *ngFor="let idea of ideas" class="col-md-12  card radius-15 align-content-center border mb-0  mt-2">
+    <div class="mt-2">
+        <div class="media pt-3 m-auto">
+            <div class="chat-user-online">
+                <img [src]="'http://139.162.47.239/upload/' + idea.user.avatar" width="42" height="42" class="rounded-circle" alt="" />
+            </div>
+            <div class="media-body ml-2">
+                <div class="row">
+                    <h5 *ngIf="idea.anonymous == false" class="mb-0 chat-title col-11">{{idea.user.fullName}}</h5>
+                    <h5 *ngIf="idea.anonymous == true" class="mb-0 chat-title col-11">Unknow</h5>
+                    <div *ngIf="checkUpdateDeleteOptions(idea.user.userId)" class="dropdown  col-1 justify-content-end">
+                        <div class="cursor-pointer font-24 dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded'></i>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-right bg-body"> <a (click)="editIdea(idea)" type="button" class="dropdown-item">Edit Idea</a>
+                            <a (click)="deleteIdea(idea.id)" type="button" class="dropdown-item">Delete Idea</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card-body">
+            <div class="row text-center m-auto">
+                <div class="col-3">
+                    <h6>Title: {{idea.title}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Category: {{idea.category.name}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Event: {{idea.event.name}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Created at: {{idea.createdAt | date}}</h6>
+
+                </div>
+            </div>
+
+            <div class="card-body Regular shadow col-11 m-auto align-content-center  radius-15">
+                <div class="row" type="button" (click)="show(idea.id)">
+                    <p class="card-text text-justify text-center font-20">{{idea.content}}</p>
+                </div>
+                <br>
+                <div *ngIf="idea.file.file" class="row col-12 text-center align-content-center m-auto ">
+                    <div *ngFor="let f of idea.file.file">
+                        <div *ngIf="checkFileType(f) == 'image'" class="col-2" type="button">
+                            <img [src]="'http://139.162.47.239/upload/' + f" class="card-img" alt="...">
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'pdf'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_pdf.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'ppt'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_powerpoint.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'docx'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_doc.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'csv'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_csv.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- </div> -->
+                <br>
+                <div class="row mt-1">
+                    <div class="col-10 d-flex">
+                        <div class="col-1">
+                            <i class="fadeIn animated bx bx-like"></i> {{idea.totalLike}}
+                        </div>
+                        <div class="col-1">
+                            <i class="fadeIn animated bx bx-dislike"></i> {{idea.totalDislike}}
+                        </div>
+                        <div class="col-2">
+                            <i class="lni lni-eye"></i> {{idea.totalViews}}
+                        </div>
+                    </div>
+                    <div class="col-2 justify-content-end">
+                        <i class="fadeIn animated bx bx-comment"></i> {{idea.totalComment}}
+                    </div>
+
+                </div>
+                <hr color="black" size="10px" class="align-content-center m-auto" />
+                <div class="row align-content-center text-center m-auto">
+
+                    <div (click)="like(idea.id)" class="col-1  m-1">
+                        <p type="button" class=" btn text-info font-14 "><i [ngClass]="{'bxs-like': idea.isLikes == true, 'bx-like': idea.isLikes == false}" class="fadeIn animated bx"></i> Liked
+                        </p>
+                    </div>
+
+                    <div (click)="dislike(idea.id)" class="col-1  m-1">
+                        <p type="button" class=" btn text-info font-14 "><i [ngClass]="{ 'bxs-dislike': idea.isDislikes == true }" class=" fadeIn animated bx "></i> Disliked
+                        </p>
+                    </div>
+
+                </div>
+                <hr color="black " size="10px " class="align-content-center m-auto " />
+
+
+                <div class="row m-auto pt-2 ">
+
+                    <a (click)="show(idea.id)" type="button ">
+                        <div class="media ">
+                            <div class="chat-user-online ">
+                                <img [src]="user.avatar" width="42 " height="42 " class="rounded-circle " alt=" " />
+                            </div>
+                            <div class="media-body ml-2 col-7 ">
+
+                                <div class="input-group-append ">
+                                    <textarea class="form-control col-7 " rows="1 " cols="3 " placeholder="Write comment... "></textarea>
+
+
+                                    <div class="input-group-append custom-control custom-switch col-4 align-content-center text-center m-auto ">
+                                        <input type="checkbox " class="custom-control-input ">
+                                        <label class="custom-control-label font-14 ">Hide
+                                            Identity</label>
+                                    </div>
+
+
+                                    <div class="input-group-append ">
+                                        <button class="btn btn-outline-secondary " type="button " id="button-addon2 "><i
+                                                class="bx bx-send "></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+                <list-comment [comments]="idea.comment"></list-comment>
+
+                <a (click)="show(idea.id)" type="button" class="link-info">See more comment...</a>
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,94 @@
+<!-- wrapper -->
+<div class="wrapper">
+    <!--sidebar-wrapper-->
+    <div class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <div class="">
+                <img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />
+            </div>
+            <div>
+                <h4 class="logo-text">Greenwich</h4>
+            </div>
+            <a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
+            </a>
+        </div>
+        <!--navigation-->
+        <ul class="metismenu" id="menu">
+            <li>
+                <a [routerLink]="['/qam/dashboard']" href="#">
+                    <div class="parent-icon icon-color-2"><i class="lni lni-dashboard"></i>
+                    </div>
+                    <div class="menu-title">Dashboards</div>
+                </a>
+            </li>
+
+            <li>
+                <a [routerLink]="['/qam/categorymanager']" href="#">
+                    <div class="parent-icon icon-color-2"><i class="lni lni-package"></i>
+                    </div>
+                    <div class="menu-title"> Category Manager</div>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/qam/idea']" href="javascript:;">
+                    <div class="parent-icon icon-color-2"><i class="lni lni-bulb"></i>
+                    </div>
+                    <div class="menu-title">Most Popular Idea</div>
+                </a>
+
+                <!-- <ul>
+                    <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
+                    </li>
+                    <li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Sales</a>
+                    </li>
+                </ul> -->
+            </li>
+
+
+            <li>
+                <a [routerLink]="['/qam/documentdownload']" href="#">
+                    <div class="parent-icon icon-color-2"><i class="lni lni-download"></i>
+                    </div>
+                    <div class="menu-title"> Download document
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+        <!--end navigation-->
+    </div>
+    <!--end sidebar-wrapper-->
+    <!--header-->
+    <app-header></app-header>
+    <!--end header-->
+    <!--page-wrapper-->
+    <div class="page-wrapper">
+        <!--page-content-wrapper-->
+        <div class="page-content-wrapper">
+            <router-outlet></router-outlet>
+
+        </div>
+        <!--end page-content-wrapper-->
+    </div>
+    <!--end page-wrapper-->
+    <!--start overlay-->
+    <div class="overlay toggle-btn-mobile"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--><a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <!--footer -->
+    <app-footer></app-footer>
+    <!-- end footer -->
+</div>
+<!-- end wrapper -->
+<!--start switcher-->
+
+<app-switcherWrapper></app-switcherWrapper>
+
+
+
+<script>
+    import PerfectScrollbar from 'perfect-scrollbar';
+    const socialListScrollbar = new PerfectScrollbar('.dashboard-social-list');
+    const topCountriesScrollbar = new PerfectScrollbar('.dashboard-top-countries');
+</script>

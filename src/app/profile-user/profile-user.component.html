@@ -1,0 +1,88 @@
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">User Profile</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ml-auto">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Settings</button>
+                <button type="button" class="btn btn-primary bg-split-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"> <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left"> <a class="dropdown-item" href="javascript:;">Action</a>
+                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="javascript:;">Something else here</a>
+                    <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+    <div class="user-profile-page">
+        <div class="card radius-15">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-lg-7 border-right">
+                        <div class="d-md-flex align-items-center">
+                            <div class="mb-md-0 mb-3">
+                                <img [src]="user.avatar" class="rounded-circle shadow" width="130" height="130" alt="" />
+                            </div>
+                            <div class="ml-md-4 flex-grow-1">
+                                <div class="d-flex align-items-center mb-1">
+                                    <h4 class="mb-0">{{user.firstName + " " + user.lastName}}</h4>
+                                </div>
+
+                                <p class="text-primary"><i class='bx bx-buildings'></i>Departments: {{user.department.name}}</p>
+
+                                <p *ngIf="user.role == 1" class="text-primary"><i class='bx bx-buildings'></i>Role: Admin</p>
+                                <p *ngIf="user.role == 2" class="text-primary"><i class='bx bx-buildings'></i>Role: QAM</p>
+                                <p *ngIf="user.role == 3" class="text-primary"><i class='bx bx-buildings'></i>Role: QAC</p>
+                                <p *ngIf="user.role == 4" class="text-primary"><i class='bx bx-buildings'></i>Role: Staff</p>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <table class="table table-sm table-borderless mt-md-0 mt-3">
+                            <tbody>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>{{user.email}}<span class="badge badge-success">online</span>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                        <div class="mb-3 mb-lg-0"> <a href="javascript:;" class="btn btn-sm btn-link"><i
+                                    class='bx bxl-github'></i></a>
+                            <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-twitter'></i></a>
+                            <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-facebook'></i></a>
+                            <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-linkedin'></i></a>
+                            <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-dribbble'></i></a>
+                            <a href="javascript:;" class="btn btn-sm btn-link"><i class='bx bxl-stack-overflow'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!--end row-->
+                <ul class="nav nav-pills">
+
+
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Edit-Profile"><span
+                                class="p-tab-name">Edit Profile</span><i
+                                class='bx bx-message-edit font-24 d-sm-none'></i></a>
+                    </li>
+                </ul>
+                <list-idea-of-event></list-idea-of-event>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,185 @@
+<!--page-content-wrapper-->
+
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">QAM</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Department Manager</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+    <!--end breadcrumb-->
+    <div class="col-12 card radius-15">
+        <div class="card-body p-0">
+            <div class="row">
+                <h4 class="mb-0 text-center">Department List</h4>
+            </div>
+            <br>
+            <div class=" row col-3 align-content-center m-auto">
+
+                <button (click)="isShowForm = true" *ngIf="!isShowForm" class="btn btn-success  m-auto"> <i
+                        class="fadeIn animated bx bx-add-to-queue"></i>
+                    Add new Department</button>
+                <br>
+
+            </div>
+            <br>
+
+            <div *ngIf="isShowForm">
+                <div class="row me-2">
+                    <form [formGroup]="departmentForm" (ngSubmit)="addDepartment()" novalidate>
+
+                        <div class=" row form-group align-content-center m-auto">
+                            <h4 class="mb-0 text-center">Department Name </h4>
+                            <div class="row pt-2">
+                                <input type="text" class="form-control col-5 m-auto" placeholder="Enter Name Category" formControlName="name" />
+                            </div>
+                            <div class="text-danger text-center invalid-feedback d-block" *ngIf="!departmentForm.get('name')?.valid && (departmentForm.get('name')?.dirty || departmentForm.get('name')?.touched)">
+
+                                <div *ngIf="departmentForm.get('name')?.errors?.['required']">
+                                    <small class="text-danger text-center invalid-feedback d-block">Name is required</small>
+                                </div>
+
+                            </div>
+
+                            <div class="row pt-2">
+                                <button class="btn btn-success col-3  m-auto" type="submit"> <i
+                                        class="fadeIn animated bx bx-add-to-queue"></i>
+                                    Add new Department</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+        <hr>
+
+
+        <br>
+        <div class="table-responsive p-1">
+
+            <div class="row col-12 card radius-15 m-auto">
+                <table class="table align-middle text-center m-auto">
+
+                    <thead>
+                        <tr>
+                            <th class="align-middle text-center">Id</th>
+                            <th class="align-middle text-center">Name</th>
+                            <th class="align-middle text-center">Total Member</th>
+                            <th class="align-middle text-center">Total Idea</th>
+                            <th class="align-middle text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let department of departments">
+                            <td class="align-middle text-center">{{department.id}}</td>
+                            <td class="align-middle text-center">{{department.name}}</td>
+                            <td class="align-middle text-center">{{department.user.length}}</td>
+                            <td class="align-middle text-center">{{department.totalIdea}}</td>
+                            <td class="align-middle text-center">
+                                <!-- <button type="button " class="btn btn-info radius-15 me-3 " data-bs-toggle="modal " data-bs-target="#exampleModal " >Edit</button> -->
+                                <button type="button" (click)="getADepartment(department.id)" class="btn btn-info radius-15 me-3 " data-bs-toggle="modal" data-bs-target="#exampleModal"> Edit</button>
+
+                                <button type="button " (click)="deleteDepartment(department.id)" class="btn btn-danger radius-15 ">Delete</button>
+                            </td>
+
+                        </tr>
+                        <!-- <tr *ngFor="let department of departments">
+                            <td class=" align-middle text-center ">{{department.departmentId}}</td>
+                            
+                            <td class="align-middle text-center ">{{department.department}}</td>
+                            <td class="align-middle text-center ">
+                               
+                                <button type="button" class="btn btn-info radius-15 me-3 " data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" > Edit</button>
+
+                                <button type="button " (click)="deleteDepartment(department.departmentId) "
+                                    class="btn btn-danger radius-15 ">Delete</button>
+                            </td>
+
+                        </tr> -->
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog ">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Department</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+
+                        <div class="card-body ">
+
+                            <div class="tab-content mt-3 ">
+
+                                <div class="shadow-none border mb-0 radius-15 ">
+                                    <div class="card-body ">
+
+                                        <div class="row ">
+                                            <div class="col-12 ">
+
+                                                <form class="form-horizontal " [formGroup]="editDepartmentForm " novalidate>
+                                                    <div class="form-row ">
+                                                        <div class="form-group ">
+                                                            <label>Name</label>
+                                                            <input type="text " formControlName="department" placeholder="HR..." class="form-control " required>
+                                                            <div class="text-danger text-center invalid-feedback d-block " *ngIf="!editDepartmentForm.controls.department?.valid && (editDepartmentForm!.controls.department?.dirty || editDepartmentForm.controls.department?.touched) ">
+
+                                                                <span [hidden]="!editDepartmentForm.controls.department.errors?.['required'] ">
+                                                                    Department is required!
+                                                                </span>
+                                                                <span [hidden]="!editDepartmentForm.controls.department.errors?.['minlength'] ">
+                                                                    Department must be at least 2 characters long!
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="modal-footer ">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit " data-bs-dismiss="modal" class="btn btn-primary" (click)="editDepartment(department.id)">Save changes</button>
+                                                    </div>
+
+
+                                                </form>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

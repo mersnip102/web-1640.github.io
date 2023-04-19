@@ -1,0 +1,127 @@
+<div class="page-content">
+
+    <div class="page-breadcrumb d-none d-md-flex align-items-center">
+
+
+        <div class="breadcrumb-title pr-3">Admin</div>
+        <div class="mr-1">
+            <div class="pl-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Event</li>
+
+
+                        <li class="breadcrumb-item active" aria-current="page">Event And Deadline</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="col-md-12 card radius-15 align-content-center ">
+        <div class="card-body col-md-8 m-auto">
+
+            <form class="form-horizontal" [formGroup]="eventForm" (ngSubmit)="addEvent(eventForm.value)" validate>
+
+                <div>
+                    <h3 class="text-center text-info">Create New Event</h3>
+                </div>
+                <hr>
+
+                <div class="row text-center align-content-center">
+
+                    <div class="form-group col-md-12 m-auto">
+                        <h5>Event Name</h5>
+                        <input type="text" class="form-control" placeholder="" formControlName="name" required="">
+                        <div class="text-danger text-center invalid-feedback d-block" *ngIf="!eventForm.get('name')?.valid && (eventForm.get('name')?.dirty || eventForm.get('name')?.touched)">
+
+                            <div *ngIf="eventForm.get('name')?.errors?.['required']">
+                                <small>Name is required</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center align-content-center">
+
+
+                    <div class="form-group col-md-6 m-auto ">
+                        <div class="form-group">
+                            <h6 class="col-sm-12 control-label ">Deadline for Event</h6>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 m-auto ">
+                        <div class="form-group">
+                            <h6 class="col-sm-12 control-label">Deadline for Comment</h6>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row text-center align-content-center">
+
+
+                    <div class="form-group col-md-6 m-auto ">
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <input type="datetime-local" class="form-control" placeholder="" formControlName="deadlineIdea" required="">
+                            </div>
+                            <div class="text-danger text-center invalid-feedback d-block" *ngIf="!eventForm.get('deadlineIdea')?.valid && (eventForm.get('deadlineIdea')?.dirty || eventForm.get('deadlineIdea')?.touched)">
+                                <div *ngIf="eventForm.get('deadlineIdea')?.errors?.['incorrect']">
+                                    <small>Deadline Idea should be a future date.</small>
+                                </div>
+                                <div *ngIf="eventForm.get('deadlineIdea')?.errors?.['required']">
+                                    <small>Deadline Idea is required.</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 m-auto ">
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <input type="datetime-local" class="form-control" placeholder="" formControlName="deadlineComment" required="">
+                            </div>
+                            <div class="text-danger text-center invalid-feedback d-block" *ngIf="!eventForm.get('deadlineComment')?.valid && (eventForm.get('deadlineComment')?.dirty || eventForm.get('deadlineComment')?.touched)">
+
+                                <div [hidden]="!eventForm.get('deadlineComment')?.errors?.['required']">
+                                    <small>Deadline Comment is required!</small>
+
+                                </div>
+
+                                <div *ngIf="eventForm.get('deadlineComment')?.errors?.['incorrect']">
+                                    <small>Deadline Comment should be a future date.</small>
+                                </div>
+
+                                <div *ngIf="eventForm.get('deadlineComment')?.errors?.['invalid']">
+                                    <small>Deadline Comment should be after Deadline Idea.</small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="col-sm-12 form-group text-center align-content-center">
+                    <br>
+                    <button class="btn btn-lg btn-info" [disabled]="!eventForm.valid" type="submit">Create Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

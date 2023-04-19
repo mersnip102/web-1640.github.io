@@ -1,0 +1,169 @@
+<!--<div class="page-content">
+    
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">QAM</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Homepage</li>
+                </ol>
+            </nav>
+        </div>
+
+
+    </div>
+    
+
+    <div class="card-deck">
+
+        <div class="card radius-15">
+            <div class="card-body">
+                <h5 class="mb-0 text-center">Total Data</h5>
+                <div class="row">
+
+                    <div class="form-group align-items-center text-center col-md-4">
+                        <i class="bx bx-calendar font-30 text-danger"></i>
+                        <p class="user-name mb-0">Event</p>
+                        <p class="mb-0 font-20">6</p>
+                    </div>
+                    <div class="form-group align-items-center text-center col-md-4">
+                        <i class="bx bx-package font-30 text-danger"></i>
+                        <p class="user-name mb-0">Category</p>
+                        <p class="mb-0 font-20">6</p>
+                    </div>
+                    <div class="form-group align-items-center text-center col-md-4">
+                        <i class="bx bx-bulb font-30 text-danger"></i>
+                        <p class="user-name mb-0">Idea</p>
+                        <p class="mb-0 font-20">6</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <app-top-popular-ideas></app-top-popular-ideas>
+</div> -->
+
+<div class="page-content">
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">QAM</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx
+                bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Most popular idea</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="row ">
+        <div class="card radius-15">
+            <div class="card-body radius-15">
+                <div class="row">
+                    <div class="col-3">
+
+                        <div *ngFor="let opt of arrayBip" class="chip">{{opt}}<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                        </div>
+                    </div>
+
+                    <div class="accordion accordion-flush col-6 " id="accordionExample">
+                        <div class="accordion-item text-center align-content-center m-auto">
+                            <h2 class="accordion-header" id="headingOne">
+                                <!-- <button class="accordion-button col-3 btn bg-info text-white text-center align-content-center m-auto " type="button" >
+                                    Filter
+                                </button> -->
+
+                                <button type="button" class="col-3 btn btn-sm bg-info text-white text-center align-content-center m-auto  radius-30" data-bs-toggle="collapse" data-bs-target="#Filter" aria-expanded="true" aria-controls="Filter"><i class="fadeIn animated bx bx-filter"></i>Filter</button>
+                            </h2>
+                            <div id="Filter" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body card-body ">
+                                    <div class="row ">
+
+                                        <div class="btn-sm-group col-lg-4 text-center align-item-center " role="group" aria-label="Button group with nested dropdown">
+                                            <h6 class="text-center">Event</h6>
+
+                                            <select (change)="onDropdownEvent($event)" class=" btn btn-light-primary radius-30 m-auto col-12 hovering-zoom " type="button ">
+                    
+                                                <option *ngFor="let stt of ngListEvent " [value]="stt.id" class="bg-light-primary text-dark ">
+                                                    {{ stt.name }}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="btn-sm-group col-lg-4 text-center align-item-center " role="group " aria-label="Button group with nested dropdown ">
+                                            <h6 class="text-center ">Category</h6>
+
+                                            <select (change)="onDropdownCategory($event)" class="btn btn-light-primary radius-30 m-auto col-12 hovering-zoom " type="button ">
+                    
+                                                <option *ngFor="let stt of ngListCategory " [value]="stt.id " class="bg-light-primary text-dark ">
+                                                    {{ stt.name }}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="btn-sm-group col-lg-4 text-center align-item-center " role="group " aria-label="Button group with nested dropdown ">
+                                            <h6 class="text-center ">Department</h6>
+
+                                            <select (change)="onDropdownDepartment($event)" class="btn btn-light-primary radius-30 m-auto col-12 hovering-zoom " type="button ">
+                    
+                                                <option *ngFor="let stt of ngListDepartment " [value]="stt.id " class="bg-light-primary text-dark " >
+                                                    {{ stt.name }}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+
+                    <div class="btn-sm-group col-3 text-center align-item-center " role="group " aria-label="Button group with nested dropdown ">
+                        <h6 class="text-center ">Sorted By</h6>
+
+                        <select (change)="onDropdownFilter($event)" class="btn btn-light-info radius-30 m-auto col-9 hovering-zoom " type="button ">
+
+                            <option *ngFor="let stt of ngFilterIdea " [value]="stt.id" class="bg-light-info text-dark ">{{
+                                stt.name }}</option>
+                        </select>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <list-idea-of-event [ideas]="ideas" (ideaEvent)="receiveIdea($event)"></list-idea-of-event>
+
+        <div *ngIf="totalPages>=2" class="pagination justify-content-end pt-2">
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination round-pagination ">
+                    <li class="page-item">
+                        <button class="page-link" [disabled]="currentPage === 1" (click)="previousPage()">Previous</button>
+                    </li>
+                    <li *ngFor="let i of pageArray" [ngClass]="{ 'active': i === currentPage }" class="page-item" id="paginator" (click)="changePage(i)"><a class="page-link">{{i}}</a>
+
+                        <li class="page-item">
+                            <button class="page-link" [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+                        </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

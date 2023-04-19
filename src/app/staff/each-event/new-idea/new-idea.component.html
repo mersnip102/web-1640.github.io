@@ -1,0 +1,142 @@
+<div class="page-content">
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">Staff</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx
+                bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Idea</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-body  col-11 m-auto align-content-center  radius-15">
+
+            <form [formGroup]="createIdeaForm" (ngSubmit)="addAnIdea(createIdeaForm.value)" validate>
+
+                <h2 class="text-center  ">Create Idea</h2>
+
+
+                <div class="form-group">
+                    <h5 class="text-center">Title</h5>
+                    <input type="text" class="form-control" placeholder="Title..." formControlName="title">
+                    <div class="text-danger text-center invalid-feedback d-block" *ngIf="!createIdeaForm.get('title')?.valid && (createIdeaForm.get('title')?.touched)">
+                        <span [hidden]="!createIdeaForm.get('title')?.errors?.['minlength']">
+                            Title must be at least 5 characters long!
+                        </span>
+                        <div *ngIf="createIdeaForm.get('title')?.errors?.['required']">
+                            Title Idea is required.
+                        </div>
+                        <div *ngIf="createIdeaForm.get('title')?.errors?.['maxlength']">
+                            Title must be at most 100 characters long!
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 class="text-center">Category</h5>
+                    <select formControlName="categoryId" class="form-select" aria-label="Button group with nested dropdown">
+                            <option *ngFor="let category of categories" [value]="category.id" class="text-center">
+                                {{category.name}}</option>
+
+                        </select>
+                    <div class="text-danger text-center invalid-feedback d-block" *ngIf="!createIdeaForm.get('categoryId')?.valid && (createIdeaForm.get('categoryId')?.dirty || createIdeaForm.get('categoryId')?.touched)">
+
+                        <div *ngIf="createIdeaForm.get('categoryId')?.errors?.['required']">
+                            Category's Idea is required.
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h5 class="text-center">Content</h5>
+                    <textarea formControlName="content" class="form-control" placeholder="Content..." rows="3" cols="3"></textarea>
+                    <div class="text-danger text-center invalid-feedback d-block" *ngIf="!createIdeaForm.get('content')?.valid && (createIdeaForm.get('content')?.dirty || createIdeaForm.get('content')?.touched)">
+                        <span [hidden]="!createIdeaForm.get('content')?.errors?.['minlength']">
+                            Content must be at least 5 characters long!
+                        </span>
+                        <div *ngIf="createIdeaForm.get('content')?.errors?.['required']">
+                            Content Idea is required.
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 class="text-center">Document</h5>
+                    <div class="card radius-15">
+                        <div class="card-body">
+
+                            <p-fileUpload name="demo[]" [showUploadButton]="false" (onRemove)="onRemove($event)" (onClear)="onClear($event)" url="https://www.primefaces.org/cdn/api/upload.php" (onSelect)="onSelect($event)" [multiple]="true" [fileLimit]=5 [maxFileSize]="5000000">
+                                <ng-template pTemplate="content">
+                                    <ul *ngIf="uploadedFiles.length">
+
+                                    </ul>
+                                </ng-template>
+                            </p-fileUpload>
+
+                            <div class="row mt-2">
+                                <div class="form-check">
+                                    <input formControlName="isCheckedTerms" type="checkbox" class="form-check-input" name="customCheck" id="customCheck1">
+
+                                    <label class="form-check-label link-info" type="button" data-toggle="modal" data-target="#termsModal">Terms
+                                        and Conditions before submit document</label>
+                                </div>
+
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollbar">
+                                    <div class="modal-content ">
+                                        <form>
+
+                                            <div class="modal-header">
+                                                <h5 class="modal-title ">Terms and Coditions before submit document</h5>
+
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label>1. Document Format and Requirements: Contributed materials are frequently required to be in a specific format and to meet document length, content, language, and format requirements,...
+
+                                                    2. Commitment to compliance: Idea contributors must usually commit to following the terms and conditions of the idea contribution system, ensuring integrity and honesty, and not breaking any laws.
+                                                    
+                                                    
+                                                    Do you agree to term before posting the idea?</label>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <small *ngIf="createIdeaForm.get('isCheckedTerms')?.errors?.['incorrect']" class="text-danger text-center invalid-feedback d-block">Please check Terms and Conditions before submit idea</small>
+
+                    </div>
+                    <div class="form-check m-3">
+                        <input formControlName="anonymous" type="checkbox" class="form-check-input">
+                        <label class="form-check-label" for="customCheck1">Incognito</label>
+                    </div>
+                    <div class="row col-3 text-center justify-content-center m-auto">
+                        <button [disabled]="createIdeaForm.invalid" type="submit" class="btn btn-primary">Create Idea</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="page-content">
+    <div class="row">
+        <div class="col-12 col-lg-3">
+            <div class="card radius-15 bg-primary">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h5 class="mb-0 font-weight-bold text-white"></h5>
+                            <p class="mb-0 text-white">Total Ideas: {{ngDashboard.totalIdea}}
+                            </p>
+                        </div>
+                        <div class="font-35 text-white"><i class="lni lni-bulb"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="col-12 col-lg-3">
+            <div class="card radius-15 bg-warning">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h5 class="mb-0 font-weight-bold text-white"></h5>
+                            <p class="mb-0 text-black">Total Departments: {{ngDashboard.totalIdea}}</p>
+                        </div>
+                        <div class="font-35 text-black0"><i class="lni lni-bricks"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+        <div class="col-12 col-lg-3">
+            <div class="card radius-15 bg-success">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h5 class="mb-0 font-weight-bold text-white"></h5>
+                            <p class="mb-0 text-white">Total Users: {{ngDashboard.totalUser}}
+                            </p>
+                        </div>
+                        <div class="font-35 text-white"><i class='bx bx-group'></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="col-12 col-lg-3">
+            <div class="card radius-15 bg-danger">
+                <div class="card-body">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h5 class="mb-0 font-weight-bold text-white"></h5>
+                            <p class="mb-0 text-white">Total Category : {{ngDashboard.totalIdea}}
+
+                            </p>
+                        </div>
+                        <div class="font-35 text-white"><i class="lni lni-postcard"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
+
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <!-- First Chart -->
+            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions2" style="width: 100%; height: 400px; display: block;">
+            </highcharts-chart>
+        </div>
+        <div class="col-12 col-md-6">
+            <!-- Second Chart -->
+            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions3" style="width: 100%; height: 400px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <!-- Third Chart -->
+            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions4" style="width: 100%; height: 400px; display: block;">
+            </highcharts-chart>
+        </div>
+        <div class="col-12 col-md-6">
+            <!-- Fourth Chart -->
+            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions5" style="width: 100%; height: 400px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="col-md-12 card radius-15 align-content-center border mb-0 mt-4 ">
+    <div class="mt-2 ">
+        <div class="media col-7 pt-3">
+            <div class="chat-user-online">
+                <img [src]="'http://139.162.47.239/upload/' + idea.user.avatar" width="42" height="42" class="rounded-circle" alt="" />
+            </div>
+            <div class="media-body ml-2">
+                <h5 *ngIf="idea.anonymous == false" class="mb-0 chat-title col-11">{{idea.user.fullName}}</h5>
+                <h5 *ngIf="idea.anonymous == true" class="mb-0 chat-title col-11">Unknow</h5>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="row col 12 text-center m-auto">
+                <div class="col-3">
+                    <h6>Title: {{idea.title}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Category: {{idea.category.name}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Event: {{idea.event.name}}</h6>
+                </div>
+                <div class="col-3">
+                    <h6>Created at: {{idea.createdAt | date}}</h6>
+
+                </div>
+            </div>
+
+            <div class=" card-body Regular shadow col-11 m-auto
+                align-content-center radius-15">
+                <div class="row">
+                    <p class="card-text text-justify text-center font-20">{{idea.content}}</p>
+
+                </div>
+                <br>
+                <div *ngIf="idea.file.file" class="row col-12 text-center align-content-center m-auto ">
+                    <div *ngFor="let f of idea.file.file">
+                        <div *ngIf="checkFileType(f) == 'image'" class="col-2" type="button">
+                            <img [src]="'http://139.162.47.239/upload/' + f" class="card-img" alt="...">
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'pdf'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_pdf.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'ppt'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_powerpoint.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'docx'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_doc.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                        <div *ngIf="checkFileType(f) == 'csv'" class="d-flex align-items-center">
+                            <div class="col-1"><img src="../../../assets/image/image_csv.png" alt="pdf" style="width:30px;height:30px">
+                            </div>
+                            <a type="button" href="javascript:;" (click)="downloadFile(f)">{{f}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- </div> -->
+                <br>
+
+            </div>
+            <br>
+            <div class="row ">
+                <div class="col-11 d-flex">
+                    <div class="col-1">
+                        <i class="fadeIn animated bx bx-like"></i> {{idea.totalLike}}
+                    </div>
+                    <div class="col-1">
+                        <i class="fadeIn animated bx bx-dislike"></i> {{idea.totalDislike}}
+                    </div>
+                    <div class="col-2">
+                        <i class="lni lni-eye"></i> {{idea.totalViews}}
+                    </div>
+                </div>
+                <div class="col-1 justify-content-end">
+                    <i class="fadeIn animated bx bx-comment"></i> {{idea.totalComment}}
+                </div>
+            </div>
+
+            <app-like-dislike [idea]="idea" (ideaEvent)="receiveIdea($event)"></app-like-dislike>
+
+            <!-- comment -->
+            <input-comment [allowComment]="allowComment" [postId]="idea.id" (ideaEvent)="receiveIdea($event)"></input-comment>
+            <list-comment [comments]="comments" (commentEvent)="receiveIdea($event)"></list-comment>
+        </div>
+    </div>
+
+</div>

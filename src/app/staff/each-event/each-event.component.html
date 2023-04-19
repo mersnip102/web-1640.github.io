@@ -1,0 +1,46 @@
+<div class="page-content">
+
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">Staff</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class='bx
+                bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Event Name</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="row ">
+
+        <!-- <div class="col-md-12 card radius-15 align-content-center border mb-0 mt-2"> -->
+
+        <div class="row card-body Regular shadow col-11 m-auto align-content-center  radius-15">
+
+            <div class="col-7">
+                <h4 class="text-right">{{event.name}}</h4>
+
+            </div>
+            <div class="col-5">
+                <h6 class="text-center align-content-center">{{event.deadlineIdea | date : "medium"}} - {{event.deadlineComment | date : "medium"}}</h6>
+            </div>
+
+        </div>
+        <br>
+        <!-- </div> -->
+        <div class="col-md-12 radius-15 align-content-center text-center m-auto pt-4">
+            <button [routerLink]="['/staff/newidea', event.id]" [ngClass]="{'disabled': allowCreateIdea == false}" class="btn btn-primary"> Create
+                New Idea</button>
+        </div>
+        <!-- Modal -->
+
+        <list-idea-of-event [ideas]="ideas" (ideaEvent)="receiveIdea($event)"></list-idea-of-event>
+    </div>
+
+</div>

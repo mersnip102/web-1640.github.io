@@ -1,0 +1,257 @@
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="breadcrumb-title pr-3">Admin</div>
+        <div class="pl-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i
+                                class='bx bx-home-alt'></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Event</li>
+                    <li class="breadcrumb-item active" aria-current="page">Event List
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="col-md-12 card radius-15 align-content-center ">
+
+        <div class="card-header border-bottom-0">
+            <div class="row">
+                <div class="col-md-8 ">
+                    <div class="list-group list-group-horizontal text-center
+                        float-start" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-event" role="tab" aria-controls="list-event">All</a>
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-event" role="tab" aria-controls="list-event">Doing</a>
+                        <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-event" role="tab" aria-controls="list-event">Done</a>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-right">
+                    <a [routerLink]="['/admin/eventanddeadline']">
+
+                        <button type="button" class="btn btn-info radius-15 me-3
+                            ">Create new Event </button>
+                    </a>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <br>
+
+
+
+
+    <div class="col-md-12 card radius-15 align-content-center ">
+        <br>
+
+
+        <div class="card-body p-0 tab-pane fade show active" id="list-event" role="tabpanel" aria-labelledby="list-home-list">
+            <h2 class="text-center text-info">Event List</h2>
+            <hr />
+
+            <div class="row tab-content " id="nav-tabContent">
+
+                <div class="col-12 col-lg-4" *ngFor="let event of events">
+                    <div class="card radius-15 d-flex">
+                        <div class="card-body m-auto text-center">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h6 class="text-center">{{event.name}}</h6>
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <p [ngClass]="{ 'text-bg-warning':
+                                        event.status == 'Doing',
+                                        'text-bg-success': event.status ==
+                                        'Done' }" class="">{{event.status}}</p>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="row">
+                                    <div class="col-lg-6">Deadline Event </div>
+                                    <div class="col-lg-6">Deadline Comment</div>
+                                </div>
+                                <div class="row text-danger">
+                                    <div class="col-lg-6">{{event.deadlineIdea | date:'dd/MM/yyyy'}} </div>
+                                    <div class="col-lg-6">{{event.deadlineComment | date:'dd/MM/yyyy'}}</div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-lg-6">Idea</div>
+                                    <div class="col-lg-6 text-info">{{event.totalIdea}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Like</div>
+                                    <div class="col-lg-6 text-info">{{event.totalLike}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Dislike</div>
+                                    <div class="col-lg-6 text-info">{{event.totalDislike}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Comment</div>
+                                    <div class="col-lg-6 text-info">{{event.totalComment}}</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button type="button" (click)="getAnEvent(event.id)" class="btn
+                                            btn-info radius-15 me-1 " data-toggle="modal" data-target="#myModal">Edit</button>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <button type="button" (click)="delete(event.id)" class="btn btn-danger radius-15">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--end row-->
+            <!-- Modal -->
+            <div class="modal fade" #myModal id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog ">
+                    <div class="modal-content ">
+                        <form class="form-horizontal" [formGroup]="eventForm" (ngSubmit)="editEvent(eventForm.value)" validate>
+                            <div class="modal-header ">
+
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Event</h1>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+
+                            <div class="card-body ">
+
+                                <div class="tab-content mt-3 ">
+                                    <div class="row text-center
+                                        align-content-center">
+
+                                        <div class="form-group col-md-12
+                                            m-auto">
+                                            <h5>Event Name</h5>
+                                            <input type="text" class="form-control" placeholder="" formControlName="name" required="">
+                                            <div class="text-danger text-center invalid-feedback d-block" *ngIf="!eventForm.get('name')?.valid && (eventForm.get('name')?.dirty || eventForm.get('name')?.touched)">
+
+                                                <div *ngIf="eventForm.get('name')?.errors?.['required']">
+                                                    <small class="text-danger text-center invalid-feedback d-block">Name is required</small>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row text-center
+                                        align-content-center">
+
+                                        <div class="form-group col-md-6 m-auto
+                                            ">
+                                            <div class="form-group">
+                                                <h6 class="col-sm-12
+                                                    control-label ">Deadline for Event
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6 m-auto
+                                            ">
+                                            <div class="form-group">
+                                                <h6 class="col-sm-12
+                                                    control-label">Deadline for Comment
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center
+                                        align-content-center">
+
+
+                                        <div class="form-group col-md-6 m-auto
+                                            ">
+                                            <div class="form-group">
+
+                                                <div class="col-sm-12">
+                                                    <input type="datetime-local" class="form-control" placeholder="" formControlName="deadlineIdea" required="">
+                                                    <div class="text-danger text-center invalid-feedback d-block" *ngIf="!eventForm.get('deadlineIdea')?.valid && (eventForm.get('deadlineIdea')?.dirty || eventForm.get('deadlineIdea')?.touched)">
+                                                        <!--<div *ngIf="eventForm.get('deadlineIdea')?.errors?.['incorrect']">
+                                                            <small class="text-danger text-center invalid-feedback d-block">Deadline Idea should be a future date.</small>
+                                                        </div> -->
+                                                        <div *ngIf="eventForm.get('deadlineIdea')?.errors?.['required']">
+                                                            <small class="text-danger text-center invalid-feedback d-block">Deadline Idea is required.</small>
+                                                        </div>
+                                                        <div *ngIf="eventForm.get('deadlineIdea')?.errors?.['invalid']">
+                                                            <small class="text-danger text-center invalid-feedback d-block">Deadline Comment should be after Deadline Idea.</small>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 m-auto
+                                            ">
+                                            <div class="form-group">
+
+                                                <div class="col-sm-12">
+                                                    <input type="datetime-local" class="form-control" placeholder="" formControlName="deadlineComment" required="">
+                                                    <div [hidden]="!eventForm.get('deadlineComment')?.errors?.['required']">
+                                                        <small class="text-danger text-center invalid-feedback d-block">Deadline Comment is required!</small>
+
+                                                    </div>
+
+                                                    <!--<div *ngIf="eventForm.get('deadlineComment')?.errors?.['incorrect']">
+                                                        <small class="text-danger text-center invalid-feedback d-block">Deadline Comment should be a future date.</small>
+                                                    </div> -->
+
+                                                    <div *ngIf="eventForm.get('deadlineComment')?.errors?.['invalid']">
+                                                        <small class="text-danger text-center invalid-feedback d-block">Deadline Comment should be after Deadline Idea.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn 
+                                    btn-primary ">Save
+                                    Change</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>

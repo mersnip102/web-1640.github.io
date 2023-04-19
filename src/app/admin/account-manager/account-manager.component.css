@@ -1,0 +1,4 @@
+.lib-ng-toast-custom {
+    z-index: 9999;
+    /* z-index của modal thường là 1040 */
+}
